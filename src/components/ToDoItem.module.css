@@ -39,7 +39,7 @@
 
 /* input[type=checkbox] */
 .container {
-    width: 1rem;
+    width: calc(1rem + 0.4rem);
     padding: 0.25rem;
 }
 

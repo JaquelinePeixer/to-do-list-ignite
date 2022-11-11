@@ -1,6 +1,6 @@
 import styles from './ToDoItem.module.css';
 import { Trash } from "phosphor-react";
-import { FormEvent, HtmlHTMLAttributes, InputHTMLAttributes, useRef, useState } from 'react';
+import { useState } from 'react';
 
 interface ToDoItem {
     id: number,
@@ -12,29 +12,26 @@ interface ToDoItem {
 
 export function ToDoItem({ id, content, isChecked, onDeleteComment, onChangeChecked }: ToDoItem) {
 
-    const [newIsChecked, setNewIsChecked] = useState(isChecked)
-
     function handleDeleteItem() {
         onDeleteComment(id)
     }
 
     function handleChangeChecked() {
-        setNewIsChecked(!isChecked)
-        onChangeChecked(id)        
+        onChangeChecked(id)
     }
 
     return (
         <div className={styles.toDo}>
-            <label className={styles.container}>
-                {newIsChecked
-                    ? <input type="checkbox" onChange={handleChangeChecked} checked />
-                    : <input type="checkbox" onChange={handleChangeChecked} />
-                }
-                <span className={styles.checkmark}></span>
-            </label>
+            {/* <label className={styles.container}> */}
+            {isChecked
+                ? <input type="checkbox" onChange={handleChangeChecked} checked />
+                : <input type="checkbox" onChange={handleChangeChecked} />
+            }
+            {/* <span className={styles.checkmark}></span> */}
+            {/* </label> */}
 
 
-            {newIsChecked
+            {isChecked
                 ? <span className={(styles.content, styles.textLineThorugh)}>{content}</span>
                 : <span className={styles.content}>{content}</span>
             }

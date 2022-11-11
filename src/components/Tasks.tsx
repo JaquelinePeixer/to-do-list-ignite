@@ -7,34 +7,31 @@ import { useState } from 'react';
 
 export function Tasks() {
     const badgeCreatedTasks = dbToDo.length;
-
-    // const [completedTasksCount, setCompletedTasksCount] = useState(0);
-
     const [newTasks, setNewTasks] = useState(dbToDo);
 
-    const completedTasksCounter = dbToDo.filter(item => {
+    const completedTasksCounter = newTasks.filter(item => {
         if (item.isChecked) {
             return item
         }
     })
+    const totalReduce = completedTasksCounter.reduce((prevValue, elem) => prevValue + 1, 0)
+    const badgeCompletedTasks = `${totalReduce} de ${badgeCreatedTasks}`;
 
-    const badgeCompletedTasks = `${completedTasksCounter.length} de ${badgeCreatedTasks}`;
+    function changeChecked(taskID: number) {
+        const newTasksListChecked = newTasks.map((item) => {
+            if (item.id === taskID) {
+                item.isChecked = !item.isChecked
+            }
+            return item
+        })
+        setNewTasks(newTasksListChecked)
+    }
 
     function deleteComment(taskID: number) {
         const newTasksList = newTasks.filter(item => {
             return item.id !== taskID
         })
         setNewTasks(newTasksList)
-    }
-
-    function changeChecked(taskID: number) {
-        const newTasksListChecked = newTasks
-        newTasksListChecked.map(item => {
-            if (item.id === taskID) {
-                item.isChecked = !item.isChecked
-            }
-        })
-        return setNewTasks(newTasksListChecked)
     }
 
     return (
