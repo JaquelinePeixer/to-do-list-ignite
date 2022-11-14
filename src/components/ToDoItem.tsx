@@ -22,19 +22,13 @@ export function ToDoItem({ id, content, isChecked, onDeleteComment, onChangeChec
 
     return (
         <div className={styles.toDo}>
-            {/* <label className={styles.container}> */}
-            {isChecked
-                ? <input type="checkbox" onChange={handleChangeChecked} checked />
-                : <input type="checkbox" onChange={handleChangeChecked} />
-            }
-            {/* <span className={styles.checkmark}></span> */}
-            {/* </label> */}
+            <label className={styles.container}>
+                <input type="checkbox" onChange={handleChangeChecked} checked={isChecked} />
+                <span className={styles.checkmark}></span>
+            </label>
 
 
-            {isChecked
-                ? <span className={(styles.content, styles.textLineThorugh)}>{content}</span>
-                : <span className={styles.content}>{content}</span>
-            }
+            <span className={isChecked ? `${styles.content}, ${styles.textLineThorugh}` : styles.content}>{content}</span>
 
             <button className={styles.delete} onClick={handleDeleteItem}>
                 <Trash size={16} />
